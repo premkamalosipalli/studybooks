@@ -93,11 +93,11 @@ WSGI_APPLICATION = 'studybooks.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'studybook', 
-        'USER': 'postgres',
-        'PASSWORD': 'verity',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        'NAME': 'studybooks', 
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': 'localhost', 
+        'PORT': '',
     }
 }
 

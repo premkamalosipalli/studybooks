@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e7(lhr*)&qugxim*il_33*4br!pdrq#es-e))tclco5kc^n$(l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.196.50.226', 'localhost', 'prem.veritypay2.com']
+ALLOWED_HOSTS = ['34.196.50.226', 'localhost', 'prem.veritypay2.com', '127.0.0.1', 'studybooks.premkamalosipalli.com']
 
 
 # Application definition
@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'studybooks.wsgi.application'
 #     }
 # }
 
+# Production Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -100,6 +101,18 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+# # Local Database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres', 
+#         'USER': 'postgres',
+#         'PASSWORD': 'verity',
+#         'HOST': 'localhost', 
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation

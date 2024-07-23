@@ -18,31 +18,63 @@ from django.http import HttpResponse
 # ]
 
 def loginPage(request):
-
     page = 'login'
 
     if request.user.is_authenticated:
         return redirect('home')
 
-    if request.method =='POST':
-        username = ''
+    if request.method == 'POST':
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
 
+        print(f'email: {email} password: {password}')
+
+        # Check if user exists
         try:
             user = User.objects.get(email=email)
-        except:
-            messages.error(request, "User Does Not Exists")
-        
-        user = authenticate(request, username=username, email=email, password=password)
+        except User.DoesNotExist:
+            messages.error(request, "User Does Not Exist")
+            return render(request, 'base/login_register.html', {'page': page})
+
+        # Authenticate user
+        user = authenticate(request, email=email, password=password)
+        print(f'user: {user}')
 
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Username or password does not exists..")
+            messages.error(request, "Username or password is incorrect.")
+
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
+# def loginPage(request):
+
+#     page = 'login'
+
+#     if request.user.is_authenticated:
+#         return redirect('home')
+
+#     if request.method =='POST':
+#         username = ''
+#         email = request.POST.get('email').lower()
+#         password = request.POST.get('password')
+
+#         print('email:'+email+" password:"+password)
+#         try:
+#             user = User.objects.get(email=email)
+#         except:
+#             messages.error(request, "User Does Not Exists")
+        
+#         user = authenticate(request, username=username, email=email, password=password)
+#         print('user:'+user)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, "Username or password does not exists..")
+#     context = {'page': page}
+#     return render(request, 'base/login_register.html', context)
 
 def logoutUser(request):
     logout(request)
